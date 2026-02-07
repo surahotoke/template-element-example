@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>テンプレートクローン（documentFragment, replaceChildren）</title>
+  <style>
+    .item-container {
+      display: flex;
+      gap: 10px;
+    }
+    .item {
+      padding: 10px;
+      background: #f0f0f0;
+    }
+  </style>
+</head>
+<body>
+  <div id="item-container" class="item-container"></div>
+
+  <template id="item-template">
+    <div class="item">
+      <h3></h3>
+      <p></p>
+    </div>
+  </template>
+
+  <script>
+    const itemDataList = [
+      { title: "りんご", info: "赤い果物" },
+      { title: "バナナ", info: "黄色い果物" },
+      { title: "ぶどう", info: "紫の果物" }
+    ]
+
+    const itemTemplate = document.getElementById("item-template")
+    const itemFragment = document.createDocumentFragment()
+
+    itemDataList.forEach(itemData => {
+      const clone = itemTemplate.content.cloneNode(true)
+      clone.querySelector("h3").textContent = itemData.title
+      clone.querySelector("p").textContent = itemData.info
+      itemFragment.append(clone)
+    })
+
+    document.getElementById("item-container").replaceChildren(itemFragment)
+  </script>
+</body>
+</html>
