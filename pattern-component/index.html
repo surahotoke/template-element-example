@@ -4,7 +4,6 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>ウェブコンポーネント（part, slot, host, exportparts）</title>
-   <script>use=e=>customElements.define(e,class extends HTMLElement{constructor(){super().attachShadow({mode:'open'}).append(document.getElementById(e).content.cloneNode(1))}})</script>
    <style>
      ::part(desu)::after {
        content: "果物です。";
@@ -30,7 +29,7 @@
    <wrap-></wrap->
    <test-></test->
  
-   <template id="test-">
+   <template define="test-">
      <style>
        :host {
          display: block;
@@ -50,7 +49,7 @@
      <p>年齢<slot name="old">「デフォ歳1」</slot>歳<span part="dayo">だよ！！</span></p>
    </template>
  
-   <template id="wrap-">
+   <template define="wrap-">
      <style>
        ::part(desu)::after {
          content: "宇宙人です。";
@@ -61,10 +60,7 @@
        <slot name="old" slot="old">「デフォ歳2」</slot>
      </test->
    </template>
- 
-   <script>
-     use("test-")
-     use("wrap-")
-   </script>
+
+   <script>document.querySelectorAll('template[define]').forEach(t=>{customElements.define(t.getAttribute('define'),class extends HTMLElement{constructor(){super().attachShadow({mode:'open'}).append(t.content.cloneNode(1))}})})</script>
  </body>
  </html>

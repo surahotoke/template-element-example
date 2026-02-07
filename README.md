@@ -39,8 +39,18 @@
 
 ## おすすめスニペット
 今回作ったおまじないを`vscode`のスニペットに登録する方法
+`vscode`の左下にある`設定`→`スニペット`→`html`→`html.json`→`中身に以下を追加`
 
-`vscode`の左下にある`設定`→`スニペット`→`html`→`html.jsonにある英語を全部消す`→`中身に以下を追加`
+### カスタム属性defineを有効にする
+```
+"ウェブコンポーネント": {
+  "prefix": "script:define",
+  "body": "<script>document.querySelectorAll('template[define]').forEach(t=>{customElements.define(t.getAttribute('define'),class extends HTMLElement{constructor(){super().attachShadow({mode:'open'}).append(t.content.cloneNode(1))}})})</script>",
+  "description": "template要素でカスタム属性defineを有効にさせる"
+}
+```
+
+### カスタム属性の使用に抵抗がある場合（`use()`という関数を作成します）
 ```
 "ウェブコンポーネント": {
   "prefix": "use",
