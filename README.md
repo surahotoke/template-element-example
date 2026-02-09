@@ -41,17 +41,22 @@
 今回作ったおまじないを`vscode`のスニペットに登録する方法
 `vscode`の左下にある`設定`→`スニペット`→`html`→`html.json`→`中身に以下を追加`
 
-### カスタム属性defineを有効にする
-```
-"ウェブコンポーネント": {
+### カスタム属性`define`を有効にする
+```json
+"ウェブコンポーネント有効化": {
   "prefix": "script:define",
   "body": "<script>document.querySelectorAll('template[define]').forEach(t=>{customElements.define(t.getAttribute('define'),class extends HTMLElement{constructor(){super().attachShadow({mode:'open'}).append(t.content.cloneNode(1))}})})</script>",
   "description": "template要素でカスタム属性defineを有効にさせる"
+},
+"ウェブコンポーネント": {
+  "prefix": "template:define",
+  "body": "<template define=\"$1\">$2</template>",
+  "description": "カスタムプロパティ定義"
 }
 ```
 
 ### カスタム属性の使用に抵抗がある場合（`use()`という関数を作成します）
-```
+```json
 "ウェブコンポーネント": {
   "prefix": "use",
   "body": "<script>use=e=>customElements.define(e,class extends HTMLElement{constructor(){super().attachShadow({mode:'open'}).append(document.getElementById(e).content.cloneNode(1))}})</script>",
