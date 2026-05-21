@@ -45,7 +45,7 @@
 ```json
 "ウェブコンポーネント有効化": {
   "prefix": "script:define",
-  "body": "<script>document.querySelectorAll('template[define]').forEach(t=>{customElements.define(t.getAttribute('define'),class extends HTMLElement{constructor(){super().attachShadow({mode:'open'}).append(t.content.cloneNode(1))}})})</script>",
+  "body": "<script>document.querySelectorAll('template[define]').forEach(t=>customElements.define(t.getAttribute('define'),class extends HTMLElement{_=this.attachShadow({mode:'open'}).append(t.content.cloneNode(1))}))</script>",
   "description": "template要素でカスタム属性defineを有効にさせる"
 },
 "ウェブコンポーネント": {
@@ -59,7 +59,7 @@
 ```json
 "ウェブコンポーネント": {
   "prefix": "use",
-  "body": "<script>use=e=>customElements.define(e,class extends HTMLElement{constructor(){super().attachShadow({mode:'open'}).append(document.getElementById(e).content.cloneNode(1))}})</script>",
+  "body": "<script>use=e=>customElements.define(e,class extends HTMLElement{_=this.attachShadow({mode:'open'}).append(document.getElementById(e).content.cloneNode(1))})</script>",
   "description": "use(customElement)を有効にする"
 }
 ```
